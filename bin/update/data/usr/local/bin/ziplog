@@ -1,0 +1,51 @@
+#!/bin/sh
+
+##---------------------
+## v1.3 2010-03-22 
+##---------------------
+
+
+# function 
+tar_logs () {
+	/bin/tar -cf log-$1.tar -T /tmp/log_list
+	if [ $? -eq 0 ]; then
+		find . -maxdepth 1  -name "*_log\[$2*" | xargs /bin/rm -f
+		/bin/rm -f /tmp/log_list
+	fi
+}
+
+DATE_TODAY="`date +%Y%m%d`"
+
+###  If ziplog already running, then exit
+
+ret=`pgrep -x ziplog | wc -l`
+#echo "`date +%F\ %H:%M:%S` ziplog count: $ret" 
+if [ $ret -gt 2 ]; then
+	sleep 1
+	ret=`pgrep -x ziplog | wc -l`
+#	echo "`date +%F\ %H:%M:%S` ziplog count: $ret"  >> /root/zip_log
+	if [ $ret -gt 2 ]; then
+		exit 0
+	fi
+fi
+
+#echo "running ziplog ....." 
+### Change dir to log_backup
+cd  /home/Data/log_backup
+
+### compress run_log[*].bak
+/usr/bin/find . -maxdepth 1  -name "*_log\[*.bak" | xargs /bin/nice -n 0 /bin/gzip
+
+### 打包压缩过的日志文件
+for log_file in `find . -maxdepth 1  -name "*_log*.bak.gz" | cut -c 11-18 | uniq`; do
+		FILE_LDATE=$log_file
+		FILE_SDATE=`echo $FILE_LDATE | cut -c 5-8`
+		
+		if [ $FILE_LDATE -lt $DATE_TODAY ]; then
+			/usr/bin/find . -maxdepth 1  -name "*_log\[$FILE_LDATE*" > /tmp/log_list
+			tar_logs $FILE_SDATE $FILE_LDATE
+		fi
+done
+
+
+#####   End of /usr/local/bin/ziplog ########

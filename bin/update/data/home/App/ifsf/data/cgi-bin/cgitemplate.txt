@@ -1,0 +1,98 @@
+
+
+<html><head>
+	<title> IFSF FCC配置与管理 </title>
+	<meta http-equiv= Content-Type  content= text/html; charset=gb2312 >
+	<style type= text/css > <!-- .STYLE1 { font-family:  宋体 ; font-size: 16px; font-weight: bold; }
+	.STYLE3 {font-size: 14px}
+	.STYLE4 {font-size: 14}
+	.STYLE5 { font-family:  宋体 ; font-size: 14px; }
+	--></style>		
+	<style type= text/css > <!-- .STYLE6 {font-family:  宋体 }
+	--></style>
+	</head>
+	<body>
+		<table   border=0 bordercolor=ffff00 width=1024  height= 509  cellspacing= 0 >
+			<tr>
+				<td width=139  height= 2  rowspan= 2 ><div align= center ><img src= images/biaoti.gif  width= 100  height= 100 ></div>
+				</td>
+				<td width= 2  rowspan= 21  background= images/bian.gif ><img width= 2  height= 80 ></td>
+				<td height= 35  background= images/biaoti2.gif ><span class= STYLE1 >&nbsp; %s 	</span></td>
+			</tr>
+			<tr>
+				<td width=1280  height=1 >&nbsp;</td>
+			</tr>			
+			<tr>
+				<td width=139  height= 2  background= images/bian2.gif >&nbsp;</td>
+				<td height= 2 >&nbsp;</td>
+			</tr>
+			<tr>
+				<td  width=139  height= 25 ><div align= center  class= STYLE1 ><span class= STYLE3 >☆</span>&nbsp;系统配置</div>
+				</td>
+				<td  rowspan= 18  valign= top >
+					%s
+				</td>
+			</tr>
+			<tr>
+			        <td width= 139><div align= center >&nbsp;&nbsp;<span class= STYLE5 ><a href=/cgi-bin/cgitime>日期时间</a></span></div>
+				</td>
+			</tr>
+			<tr>
+				<td width= 139><div align= center >&nbsp;&nbsp;<span class= STYLE5 ><a href=/cgi-bin/cgiip>网络地址</a></span></div>
+				</td>
+			</tr>		
+			<tr>
+				<td  width= 139 height= 25 ><div align= center ><span class= STYLE1 ><span class= STYLE3 >☆</span>&nbsp;连接配置</span></div>
+				</td>
+			</tr>
+			<tr>
+				<td width= 139 ><div align= center  >&nbsp;&nbsp;<span class= STYLE5 ><a href=/cgi-bin/cgisysconf >公共配置</a></span></div>
+				</td>
+			</tr>
+			<tr>
+				<td width= 139 ><div align= center  >&nbsp;&nbsp;<span class= STYLE5 ><a href=/cgi-bin/cgipriceconf>气品配置</a></span></div>
+				</td>
+			</tr>
+			<tr>
+				<td width= 139 ><div align= center   >&nbsp;&nbsp;<span class= STYLE5 ><a href=/cgi-bin/cgidspconf>气枪配置</a></span></div>
+				</td>
+			</tr>
+			<tr>
+				<td width= 139 ><div align= center  >&nbsp;&nbsp;<span class= STYLE5 ><a href=/cgi-bin/cgitlgconf>液位仪配置</a></span></div>
+				</td>
+			</tr>
+			<tr>
+				
+			<tr>
+				<td  width= 139 height= 25 ><div align= center ><span class= STYLE1 ><span class= STYLE4 >
+<span class= STYLE3 >☆</span>&nbsp;</span>其它功能</span></div>
+				</td>
+			</tr>
+			<tr>
+				<td width= 139 ><div align= center   >&nbsp;&nbsp;<span class= STYLE5 ><a href=/cgi-bin/cgisysinfo >系统信息 </a></span></div>
+				</td>
+			</tr>
+			<tr>
+				<td width= 139 ><div align= center  >&nbsp;&nbsp;<span class= STYLE5 ><a href=/cgi-bin/cgidumpshm>状态浏览</a></span></div>
+				</td>
+			</tr>
+			<tr>
+				<td width= 139 ><div align= center   >&nbsp;&nbsp;<span class= STYLE5 ><a href=/cgi-bin/cgiloglist?log=1&list=0>日志浏览</a></span></div>
+				</td>
+			</tr>
+			<tr>
+				<td width= 139 ><div align= center   >&nbsp;&nbsp;<span class= STYLE5 ><a href=/cgi-bin/cgiupdate >系统维护</a></span></div>
+				</td>
+			</tr>	
+			<tr>
+				<td width= 139 ><div align= center   >&nbsp;&nbsp;<span class= STYLE5 ><a href=/cgi-bin/cgireboot >重启 FCC</a></span></div>
+				</td>
+			</tr>	
+		</table>
+		
+		<div align= center >
+			
+		</div>
+		<p>&nbsp;</p>
+	</body>
+</html>

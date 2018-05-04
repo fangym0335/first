@@ -1,0 +1,11 @@
+-standard 
+-I../include/
++posixlib 
++matchanyintegral 
+
+-nestcomment  
+-type
+-retvalint
+
+-Duint="unsigned int"
+-Dulong="unsigned long"

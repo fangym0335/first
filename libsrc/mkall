@@ -1,0 +1,32 @@
+TF=.dirlist
+PRECOMP=/mnt/hgfs/myshare/FCC_SRC20170824/fcc/precomp
+#删除遗留的临时文件
+if [ -f $TF ]; then
+	rm $TF
+	if [ $? != 0 ]; then
+		echo '删除临时文件失败'
+		exit -1;
+	fi
+fi
+
+#将所有目录保存到文件中
+ls -l | grep ^d | awk '{print $9'} > $TF
+if [ $? != 0 ]; then
+	echo '取目录失败'
+	exit -1;
+fi
+
+while read DIR
+do
+	cd $DIR
+#查看是否有Makefile文件
+	if [ -f Makefile ]; then
+		make
+	fi
+	cd ..
+done <$TF
+
+#删除临时文件
+rm $TF
+
+echo 'DONE'

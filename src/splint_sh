@@ -1,0 +1,4 @@
+#!/bin/bash
+#splint  -standard *.c  -I/home/jie/3.4.1/arm-linux/include/;../include/  +posixlib +matchanyintegral -nestcomment  -type
+#splint  -standard *.c   -I../include/  +posixlib +matchanyintegral -nestcomment  -type
+splint  -standard *.c   -I/home/jie/3.4.1/arm-linux/include/ -I../include +posixlib +matchanyintegral -nestcomment  -type

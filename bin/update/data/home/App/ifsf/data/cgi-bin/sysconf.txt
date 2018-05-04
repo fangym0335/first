@@ -1,0 +1,69 @@
+<html> <head> <title>油机配置信息输入</title> </head>
+<body >
+<table width="1096" border="0"> 
+	<tr> 
+	<td width="104" height="40">&nbsp;</td>
+	<td width="500">&nbsp;</td>
+	<td width="372">&nbsp;</td>
+	<td width="102">&nbsp;</td>
+	</tr>
+
+	<tr>
+	<td height="181">&nbsp;</td>
+	<td>
+		<form name=form1 method=post action=cgisysconf>
+		<table align=center>
+
+		<tr>
+		<td align=left><hr noshade=noshadw size=1></td>
+		</tr>
+
+		</table> 
+		<table bordercolor=#cc99ff width=500 border=2 align=center cellpadding=0 cellspacing=0> 
+		<tr>
+		<td width=275 height=30> <div align= right >本机TCP端口号：</div></td> 
+		<td><input name=pcd_tcp_port type=text id=pcd_tcp_port value=%d></td>
+		</tr>
+
+		<tr>
+		<td width=275 height=30> <div align= right >IO板使用的串口个数(IO板个数)：</div></td>
+		<td> <input name=serial_port_used_count  type=text  id=serial_port_used_count  value=%d> </td>
+		</tr>
+
+
+		<tr>
+		<td width=275 height=30> <div align= right>卡机TCP服务端口号：</div></td>
+		<td> <input name=sinopec_tcp_port type=text id=sinopec_tcp_port value=%d> </td>
+		</tr>
+
+		</table>
+
+		<table height= 90 align=center>
+		<tr> 
+		<td height=30 align=center> &nbsp;
+		<input type= submit  name= submit  value=提交 >
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		<input type= reset  name= reset  value=重置 > &nbsp;</td>
+		</tr> 
+		</table>
+
+		<table align=center>
+		<tr> 
+		<td align=center><a  href='./cgisysinfo' ></a></td>
+		</tr>
+		</table> 
+		</form>&nbsp;
+	</td> 
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+
+	<tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	</tr>
+</table>
+</body>
+</html> 

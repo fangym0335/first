@@ -1,0 +1,25 @@
+WORKDIR=../../
+
+LIBSRC=$(WORKDIR)/libsrc
+LIBINC=$(WORKDIR)/include
+LIBPATH=$(WORKDIR)/lib
+DLLPATH=$(WORKDIR)/lib
+BINPATH=$(WORKDIR)/bin
+PUBLIB=-lmysock -lmyipc -lcomm -lerrctl -ldebug
+
+#AR=ar
+AR=arm-linux-ar
+ARFLAGS=rv
+#CC=arca-gcc
+CC=arm-linux-gcc --static
+#CC=cc
+LINT=lint
+
+COMPFLAG=-g 
+LNFLAGS=-I$(LIBINC)
+EFLAGS=-E -I$(LIBINC)
+#SFLAGS= -fpack-struct
+SFLAGS=
+
+CFLAGS=$(COMPFLAG) -I$(LIBINC) $(SFLAGS)
+LFLAGS=-L$(LIBPATH) $(PUBLIB)

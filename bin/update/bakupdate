@@ -1,0 +1,138 @@
+#!/bin/sh
+
+# 2010/04/09 , rfs-release 1.2.53
+#
+# 1.backup
+
+if      [ ! -f "/home/App/ifsf/etc/dlbtlg.cfg" ] ;
+then
+        /bin/touch /home/App/ifsf/etc/dlbtlg.cfg > /dev/null  2>&1
+fi
+
+if      [ ! -f "/home/App/ifsf/etc/dlb.cfg" ] ;   
+then                                            
+        /bin/touch /home/App/ifsf/etc/dlb.cfg > /dev/null  2>&1   
+fi
+
+if     	[ ! -f "/home/App/ifsf/etc/obtain.cfg" ] ;
+then 
+       	/bin/echo 0 > /home/App/ifsf/etc/obtain.cfg
+fi
+#
+# 2.update
+#
+#
+## --- PORT:3486 is update-----------------
+
+if [ `/bin/netstat -a|grep -q "3486"; echo $?` -ne 0 ]; then
+        echo "3485" > /home/App/ifsf/etc/udpport.cfg;
+else
+        echo "3486" > /home/App/ifsf/etc/udpport.cfg;
+fi
+
+
+##---------if no file then rm autorun_dlb in inittab---------------------
+if [ ! -f /home/App/ifsf/bin/autorun_dlb ];       then
+        /bin/sed -i '/autorun_dlb/d' /etc/inittab
+fi
+
+if [ ! -f /home/App/ifsf/bin/autorun_tank ];       then
+	/bin/sed -i '/autorun_tank/d' /etc/inittab
+fi
+
+if [ ! -f /usr/local/bin/GetTankTemp ];       then
+	/bin/sed -i '/GetTankTemp/d' /etc/inittab
+fi
+
+if [ ! -f /usr/local/bin/FccStatus ];       then
+	/bin/sed -i '/FccStatus/d' /etc/inittab
+fi
+##--------- rm pub.cfg TCC_AD_FILE_SIZE line----------------
+/bin/sed  -i '/TCC_AD_FILE_SIZE/d' /home/App/ifsf/etc/pub.cfg > /dev/null
+
+##--------- adjust -------------------------
+if [ `grep -q TCC_AD_FILE_SIZE /home/App/ifsf/etc/tcc.cfg; echo $?` -ne 0 ]; then
+	echo "TCC_AD_FILE_SIZE=200" > /home/App/ifsf/etc/tcc.cfg
+fi
+
+/bin/cp -a /home/ftp/update/data/*   / 
+if [ $? -ne 0 ]; then
+	exit 1
+fi
+
+
+if      [ -f "/home/App/ifsf/bin/autorun_dlb" ] ;   
+then                                            
+   /bin/rm -f /home/App/ifsf/bin/autorun_dlb > /dev/null  2>&1   
+fi
+#if udpport is 3485 rm dlb_main and autorun_dlb 
+
+if [ `/bin/cat /home/App/ifsf/etc/udpport.cfg ` = 3485 ]; then
+
+	if      [ -f "/home/App/ifsf/bin/dlb_main" ] ;
+	then
+        	/bin/rm -f /home/App/ifsf/bin/dlb_main > /dev/null  2>&1
+	fi
+	if [ ! -f /home/App/ifsf/etc/tlg.cfg ]; then
+		echo "IF_OPEN_DLB=0" > /home/App/ifsf/etc/tlg.cfg;
+		echo "IF_OPEN_LEAK=0" >> /home/App/ifsf/etc/tlg.cfg; 
+	else 
+		sed '1s/^.*/IF_OPEN_DLB=0/' /home/App/ifsf/etc/tlg.cfg
+	fi
+
+else 
+	if [ `ps |grep dlb_main|grep -vq grep; echo $?` -ne 0 ] ;then 
+		if [ ! -f /home/App/ifsf/etc/tlg.cfg ]; then
+			echo "IF_OPEN_DLB=0" > /home/App/ifsf/etc/tlg.cfg;
+			echo "IF_OPEN_LEAK=0" >> /home/App/ifsf/etc/tlg.cfg; 
+		else 
+			sed '1s/^.*/IF_OPEN_DLB=0/' /home/App/ifsf/etc/tlg.cfg
+		fi
+	else 
+		if [ ! -f /home/App/ifsf/etc/tlg.cfg ]; then
+			echo "IF_OPEN_DLB=1" > /home/App/ifsf/etc/tlg.cfg;
+			echo "IF_OPEN_LEAK=0" >> /home/App/ifsf/etc/tlg.cfg;
+		else 
+			sed '1s/^.*/IF_OPEN_DLB=1/' /home/App/ifsf/etc/tlg.cfg
+		fi
+	fi
+fi
+
+#
+/bin/chmod  755 /home/Data/
+/bin/chmod  755 /home/Data/log_backup
+/bin/chown  getlog.ftp /home/Data/log_backup
+
+##------ remove -----------------------
+/home/ftp/update/remove.sh
+if [ $? -ne 0 ]; then
+	exit 2
+fi
+/bin/busybox rm -f /usr/bin/showkey
+
+
+##
+if [ `grep -q  sd /proc/partitions; echo $?` -ne 0 ]; then
+	/bin/chown 502:502 /home/ftp
+fi
+/bin/chown 502:502 /home/pub
+/bin/ln -f /home/App/ifsf/etc/dsp.cfg  /home/pub/dsp.cfg
+/bin/ln -f /home/App/ifsf/etc/oil.cfg  /home/pub/oil.cfg
+/bin/ln -f /home/App/ifsf/etc/pub.cfg  /home/pub/pub.cfg
+if [ $? -ne 0 ]; then
+	exit 3
+fi
+
+/usr/bin/killall crond
+/usr/sbin/crond -c /etc/crontabs -L /dev/null &
+if [ $? -ne 0 ]; then
+	exit 4
+fi
+
+
+# 3.
+#
+#
+cd /home/App/ifsf/data/cgi-bin/
+./unlocal
+exit 0

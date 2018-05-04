@@ -1,0 +1,84 @@
+
+
+<html>
+<head>
+<title>加气机配置信息输入</title>
+</head>
+<body>
+<table width="725" border="0">
+        <tr>
+          <td width="105">&nbsp;</td>
+          <td width="500">
+<form name=form1 method=post action=cgidspconf>
+<table align=center><tr><td align=left>%s<hr noshade=noshadw size=1></td>
+</tr></table>
+<table bordercolor=#cc99ff width=500 border=2 align=center cellpadding=0 cellspacing=0>
+<input name=%s type=hidden id=append value=%d>
+<input name=num type=hidden id=num value=%d>
+<tr>
+<td ><div align= right >节点号：</div></td>
+<td><input name=node type=text id=node value=1>
+*(1-64)</td>
+</tr>
+<tr> 
+<td ><div align= right >背板连接号：</div></td>
+<td ><input name= chnlog  type= text  id= chnlog  value=1></td>
+</tr>
+<tr> 
+<td height=20> <div align= right >加气机品牌：</div></td>
+<td><select name=driver id=driver>
+	<option id=o21  value= 21 >华润加气机(偶校验)</option>
+	<option id=o22  value= 22 >华润加气机(奇校验)</option>
+	<option id=o23  value= 23 >中石化卡机联动加油机</option>
+</select>
+</td>
+</tr>
+<tr> 
+<td ><div align= right >物理面板号：</div></td>
+<td ><input name= fp  type= text  id= fp  value=1></td>
+</tr>
+<tr> 
+<td ><div align= right >逻辑面板号：</div></td>
+<td ><input name= logfp  type= text  id= logfp  value=1>
+*(1-4)</td>
+</tr><tr> 
+<td height=20> <div align=right>物理气枪号：</div></td>
+<td><input name= phygun  type= text  id= phygun  value=1>
+*(1-32)</td>
+</tr>
+<tr> 
+<td height=20> <div align=right>逻辑气枪号：</div></td>
+<td><input name= logicalgun  type= text  id= logicalgun  value=1>
+*(1-8)</td>
+</tr>
+<tr> 
+<td height=20> <div align= right >对应气品：</div></td>
+<td>
+replace
+</td>
+</tr>
+<tr> 
+<td height= 20 > <div align= right >是否启用(0/1)：</div></td>
+<td><input name= isused  type= text  id= isused  value=1></td>
+</tr>
+
+</table>
+<table align=center> <tr> <td align=center> 
+&nbsp;&nbsp;<input type= submit  name= submit  value=提交 >
+&nbsp; 
+<input type= reset  name= reset  value=重置 >
+&nbsp;</td> </tr>
+</table>
+<table align=center> <tr> <td align=center><a  href='./cgidspconf' >返回到上一页</a></td> </tr>
+</table>
+</form>
+</td>
+          <td width="106">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+</table> 
+</body> </html>
